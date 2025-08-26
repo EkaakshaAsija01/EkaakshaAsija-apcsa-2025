@@ -17,7 +17,10 @@ class Math {
     for(int i=3; i<=100; i=i+3){
       System.out.println(i);
     }
-
+    System.out.println("This is my 10000 to 0 by 10's");
+    for(int i=1000; i>=0; i=i-10){
+      System.out.println(i);
+    }
 
 
     //ANSWER:
