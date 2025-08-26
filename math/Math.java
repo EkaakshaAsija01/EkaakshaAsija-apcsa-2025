@@ -6,12 +6,17 @@ class Math {
 
     //Use the // to create single line comments to either add info or to take out code for debugging
 
-    System.out.println("Hello world!");
-
+    System.out.println("Hello world!"); 
+    
     //We will be using System.out.println and System.out.print throughout the year. Try using both below to see what the difference is!
 
-
-
+    for(int i=1; i<=100; i=i+2){
+      System.out.println(i);
+    }
+    System.out.println("Every multiple of 3");
+    for(int i=3; i<=100; i=i+3){
+      System.out.println(i);
+    }
 
 
 
