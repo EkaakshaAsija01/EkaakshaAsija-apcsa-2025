@@ -10,16 +10,8 @@ class Math {
     
     //We will be using System.out.println and System.out.print throughout the year. Try using both below to see what the difference is!
 
-    for(int i=1; i<=100; i=i+2){
-      System.out.println(i);
-    }
-    System.out.println("Every multiple of 3");
-    for(int i=3; i<=100; i=i+3){
-      System.out.println(i);
-    }
-    System.out.println("This is my 10000 to 0 by 10's");
     for(int i=1000; i>=0; i=i-10){
-      System.out.println(i);
+      System.out.print(i+ " - " );
     }
 
 
