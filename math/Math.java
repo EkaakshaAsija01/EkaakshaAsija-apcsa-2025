@@ -10,9 +10,24 @@ class Math {
     
     //We will be using System.out.println and System.out.print throughout the year. Try using both below to see what the difference is!
 
-    for(int i=1000; i>=0; i=i-10){
-      System.out.print(i+ " - " );
+    for(int i=2; i<=20; i++ ){
+      if (i%2==0){
+       System.out.println(i); 
+      }
+      
     }
+
+
+
+
+
+
+    for(int i=0;i<=30;i++){
+      if(i%3==0){
+        System.out.println(i);
+      }
+    }
+    
 
 
     //ANSWER:
