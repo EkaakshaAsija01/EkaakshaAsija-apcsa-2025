@@ -28,7 +28,7 @@ public class Roomba implements Directions {
 
 		World.readWorld(worldName);
 		World.setVisible(true);
-		roomba = new Robot(startX, startY, North, 100); 
+		roomba = new Robot(startX, startY, North, 0); 
 
 		/** This section will have all the logic that takes the Robot to every location
 		 * and cleans up all piles of beepers. Think about ways you can break this
@@ -43,13 +43,77 @@ public class Roomba implements Directions {
 		roomba.turnLeft();
 		roomba.turnLeft();
 		roomba.move();
-		roomba.pickBeeper();
-		roomba.pickBeeper();
-		roomba.pickBeeper();
-		roomba.pickBeeper();
-		roomba.pickBeeper();
-		roomba.pickBeeper();
+		for (int i=0;i<6;i++){
+			roomba.pickBeeper();
+		}
 		roomba.move();
+		roomba.turnLeft();
+		roomba.move();
+		roomba.move();
+		for (int i=0;i<5;i++){
+			roomba.pickBeeper();
+		}
+		roomba.turnLeft();
+		roomba.turnLeft();
+		for (int i=0; i<4;i++){
+			roomba.move();
+		}
+		for (int i=0;i<7;i++){
+			roomba.pickBeeper();
+		}
+		roomba.turnLeft();
+		roomba.move();
+		for (int i=0;i<6;i++){
+			roomba.pickBeeper();
+		}
+		roomba.turnLeft();
+		roomba.move();
+		roomba.move();
+		roomba.move();
+		for (int i=0;i<7;i++){
+			roomba.pickBeeper();
+		}
+		roomba.move();
+		roomba.turnLeft();
+		roomba.turnLeft();
+		roomba.turnLeft();
+		roomba.move();
+		for (int i=0;i<6;i++){
+			roomba.pickBeeper();
+		}
+		for (int i=0;i<3;i++){
+			roomba.move();
+		}
+		for (int i=0;i<6;i++){
+			roomba.pickBeeper();
+		}
+		roomba.turnLeft();
+		roomba.turnLeft();
+		roomba.turnLeft();
+		roomba.move();
+		roomba.move();
+		roomba.turnLeft();
+		roomba.turnLeft();
+		roomba.turnLeft();
+		roomba.move();
+		roomba.move();
+		for (int i=0;i<13;i++){
+			roomba.pickBeeper();
+		}
+		roomba.turnLeft();
+		roomba.move();
+		for (int i=0;i<3;i++){
+			roomba.pickBeeper();
+		}
+		roomba.move();
+
+
+
+
+
+		
+
+		
 		
 
 		int totalBeepers = 20; // Need to move this somewhere else.
