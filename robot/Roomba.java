@@ -49,23 +49,496 @@ public class Roomba implements Directions {
                 }
             }
         }
-        if (!roomba.frontIsClear() && roomba.facingEast()){
-            roomba.turnLeft();
+
+        roomba.turnLeft();
+        roomba.move();
+        roomba.turnLeft();
+        while(roomba.frontIsClear()){
             roomba.move();
-            roomba.turnLeft();
+            int pileSize = 0;
+            while(roomba.nextToABeeper()){
+                roomba.pickBeeper();
+                totalBeepers++;
+                pileSize++;
+            }
+            if (pileSize > 0) {
+                numPiles++;
+                if (pileSize > largestPile) {
+                    largestPile = pileSize;
+                }
+            }
         }
-            else {
-                roomba.move();
-            }
-     }
-        if (!roomba.frontIsClear()&& roomba.facingWest()){
-            turnRight(roomba);
+
+        turnRight(roomba);
+        roomba.move();
+        turnRight(roomba);
+        while(roomba.frontIsClear()){
             roomba.move();
-            turnRight(roomba);
-         } else{
-                roomba.move();
+            int pileSize = 0;
+            while(roomba.nextToABeeper()){
+                roomba.pickBeeper();
+                totalBeepers++;
+                pileSize++;
             }
-     }
+            if (pileSize > 0) {
+                numPiles++;
+                if (pileSize > largestPile) {
+                    largestPile = pileSize;
+                }
+            }
+        }
+
+        roomba.turnLeft();
+        roomba.move();
+        roomba.turnLeft();
+        while(roomba.frontIsClear()){
+            roomba.move();
+            int pileSize = 0;
+            while(roomba.nextToABeeper()){
+                roomba.pickBeeper();
+                totalBeepers++;
+                pileSize++;
+            }
+            if (pileSize > 0) {
+                numPiles++;
+                if (pileSize > largestPile) {
+                    largestPile = pileSize;
+                }
+            }
+        }
+
+        turnRight(roomba);
+        roomba.move();
+        turnRight(roomba);
+        while(roomba.frontIsClear()){
+            roomba.move();
+            int pileSize = 0;
+            while(roomba.nextToABeeper()){
+                roomba.pickBeeper();
+                totalBeepers++;
+                pileSize++;
+            }
+            if (pileSize > 0) {
+                numPiles++;
+                if (pileSize > largestPile) {
+                    largestPile = pileSize;
+                }
+            }
+        }
+        roomba.turnLeft();
+        roomba.move();
+        roomba.turnLeft();
+        while(roomba.frontIsClear()){
+            roomba.move();
+            int pileSize = 0;
+            while(roomba.nextToABeeper()){
+                roomba.pickBeeper();
+                totalBeepers++;
+                pileSize++;
+            }
+            if (pileSize > 0) {
+                numPiles++;
+                if (pileSize > largestPile) {
+                    largestPile = pileSize;
+                }
+            }
+        }
+
+        turnRight(roomba);
+        roomba.move();
+        turnRight(roomba);
+        while(roomba.frontIsClear()){
+            roomba.move();
+            int pileSize = 0;
+            while(roomba.nextToABeeper()){
+                roomba.pickBeeper();
+                totalBeepers++;
+                pileSize++;
+            }
+            if (pileSize > 0) {
+                numPiles++;
+                if (pileSize > largestPile) {
+                    largestPile = pileSize;
+                }
+            }
+        }
+
+        roomba.turnLeft();
+        roomba.move();
+        roomba.turnLeft();
+        while(roomba.frontIsClear()){
+            roomba.move();
+            int pileSize = 0;
+            while(roomba.nextToABeeper()){
+                roomba.pickBeeper();
+                totalBeepers++;
+                pileSize++;
+            }
+            if (pileSize > 0) {
+                numPiles++;
+                if (pileSize > largestPile) {
+                    largestPile = pileSize;
+                }
+            }
+        }
+
+        turnRight(roomba);
+        roomba.move();
+        turnRight(roomba);
+        while(roomba.frontIsClear()){
+            roomba.move();
+            int pileSize = 0;
+            while(roomba.nextToABeeper()){
+                roomba.pickBeeper();
+                totalBeepers++;
+                pileSize++;
+            }
+            if (pileSize > 0) {
+                numPiles++;
+                if (pileSize > largestPile) {
+                    largestPile = pileSize;
+                }
+            }
+        }
+        roomba.turnLeft();
+        roomba.move();
+        roomba.turnLeft();
+        while(roomba.frontIsClear()){
+            roomba.move();
+            int pileSize = 0;
+            while(roomba.nextToABeeper()){
+                roomba.pickBeeper();
+                totalBeepers++;
+                pileSize++;
+            }
+            if (pileSize > 0) {
+                numPiles++;
+                if (pileSize > largestPile) {
+                    largestPile = pileSize;
+                }
+            }
+        }
+
+        turnRight(roomba);
+        roomba.move();
+        turnRight(roomba);
+        while(roomba.frontIsClear()){
+            roomba.move();
+            int pileSize = 0;
+            while(roomba.nextToABeeper()){
+                roomba.pickBeeper();
+                totalBeepers++;
+                pileSize++;
+            }
+            if (pileSize > 0) {
+                numPiles++;
+                if (pileSize > largestPile) {
+                    largestPile = pileSize;
+                }
+            }
+        }
+
+        roomba.turnLeft();
+        roomba.move();
+        roomba.turnLeft();
+        while(roomba.frontIsClear()){
+            roomba.move();
+            int pileSize = 0;
+            while(roomba.nextToABeeper()){
+                roomba.pickBeeper();
+                totalBeepers++;
+                pileSize++;
+            }
+            if (pileSize > 0) {
+                numPiles++;
+                if (pileSize > largestPile) {
+                    largestPile = pileSize;
+                }
+            }
+        }
+
+        turnRight(roomba);
+        roomba.move();
+        turnRight(roomba);
+        while(roomba.frontIsClear()){
+            roomba.move();
+            int pileSize = 0;
+            while(roomba.nextToABeeper()){
+                roomba.pickBeeper();
+                totalBeepers++;
+                pileSize++;
+            }
+            if (pileSize > 0) {
+                numPiles++;
+                if (pileSize > largestPile) {
+                    largestPile = pileSize;
+                }
+            }
+        }
+        roomba.turnLeft();
+        roomba.move();
+        roomba.turnLeft();
+        while(roomba.frontIsClear()){
+            roomba.move();
+            int pileSize = 0;
+            while(roomba.nextToABeeper()){
+                roomba.pickBeeper();
+                totalBeepers++;
+                pileSize++;
+            }
+            if (pileSize > 0) {
+                numPiles++;
+                if (pileSize > largestPile) {
+                    largestPile = pileSize;
+                }
+            }
+        }
+
+        turnRight(roomba);
+        roomba.move();
+        turnRight(roomba);
+        while(roomba.frontIsClear()){
+            roomba.move();
+            int pileSize = 0;
+            while(roomba.nextToABeeper()){
+                roomba.pickBeeper();
+                totalBeepers++;
+                pileSize++;
+            }
+            if (pileSize > 0) {
+                numPiles++;
+                if (pileSize > largestPile) {
+                    largestPile = pileSize;
+                }
+            }
+        }
+
+        roomba.turnLeft();
+        roomba.move();
+        roomba.turnLeft();
+        while(roomba.frontIsClear()){
+            roomba.move();
+            int pileSize = 0;
+            while(roomba.nextToABeeper()){
+                roomba.pickBeeper();
+                totalBeepers++;
+                pileSize++;
+            }
+            if (pileSize > 0) {
+                numPiles++;
+                if (pileSize > largestPile) {
+                    largestPile = pileSize;
+                }
+            }
+        }
+
+        turnRight(roomba);
+        roomba.move();
+        turnRight(roomba);
+        while(roomba.frontIsClear()){
+            roomba.move();
+            int pileSize = 0;
+            while(roomba.nextToABeeper()){
+                roomba.pickBeeper();
+                totalBeepers++;
+                pileSize++;
+            }
+            if (pileSize > 0) {
+                numPiles++;
+                if (pileSize > largestPile) {
+                    largestPile = pileSize;
+                }
+            }
+        }
+         roomba.turnLeft();
+        roomba.move();
+        roomba.turnLeft();
+        while(roomba.frontIsClear()){
+            roomba.move();
+            int pileSize = 0;
+            while(roomba.nextToABeeper()){
+                roomba.pickBeeper();
+                totalBeepers++;
+                pileSize++;
+            }
+            if (pileSize > 0) {
+                numPiles++;
+                if (pileSize > largestPile) {
+                    largestPile = pileSize;
+                }
+            }
+        }
+
+        turnRight(roomba);
+        roomba.move();
+        turnRight(roomba);
+        while(roomba.frontIsClear()){
+            roomba.move();
+            int pileSize = 0;
+            while(roomba.nextToABeeper()){
+                roomba.pickBeeper();
+                totalBeepers++;
+                pileSize++;
+            }
+            if (pileSize > 0) {
+                numPiles++;
+                if (pileSize > largestPile) {
+                    largestPile = pileSize;
+                }
+            }
+        }
+         roomba.turnLeft();
+        roomba.move();
+        roomba.turnLeft();
+        while(roomba.frontIsClear()){
+            roomba.move();
+            int pileSize = 0;
+            while(roomba.nextToABeeper()){
+                roomba.pickBeeper();
+                totalBeepers++;
+                pileSize++;
+            }
+            if (pileSize > 0) {
+                numPiles++;
+                if (pileSize > largestPile) {
+                    largestPile = pileSize;
+                }
+            }
+        }
+
+        turnRight(roomba);
+        roomba.move();
+        turnRight(roomba);
+        while(roomba.frontIsClear()){
+            roomba.move();
+            int pileSize = 0;
+            while(roomba.nextToABeeper()){
+                roomba.pickBeeper();
+                totalBeepers++;
+                pileSize++;
+            }
+            if (pileSize > 0) {
+                numPiles++;
+                if (pileSize > largestPile) {
+                    largestPile = pileSize;
+                }
+            }
+        }
+         roomba.turnLeft();
+        roomba.move();
+        roomba.turnLeft();
+        while(roomba.frontIsClear()){
+            roomba.move();
+            int pileSize = 0;
+            while(roomba.nextToABeeper()){
+                roomba.pickBeeper();
+                totalBeepers++;
+                pileSize++;
+            }
+            if (pileSize > 0) {
+                numPiles++;
+                if (pileSize > largestPile) {
+                    largestPile = pileSize;
+                }
+            }
+        }
+
+        turnRight(roomba);
+        roomba.move();
+        turnRight(roomba);
+        while(roomba.frontIsClear()){
+            roomba.move();
+            int pileSize = 0;
+            while(roomba.nextToABeeper()){
+                roomba.pickBeeper();
+                totalBeepers++;
+                pileSize++;
+            }
+            if (pileSize > 0) {
+                numPiles++;
+                if (pileSize > largestPile) {
+                    largestPile = pileSize;
+                }
+            }
+        }
+         roomba.turnLeft();
+        roomba.move();
+        roomba.turnLeft();
+        while(roomba.frontIsClear()){
+            roomba.move();
+            int pileSize = 0;
+            while(roomba.nextToABeeper()){
+                roomba.pickBeeper();
+                totalBeepers++;
+                pileSize++;
+            }
+            if (pileSize > 0) {
+                numPiles++;
+                if (pileSize > largestPile) {
+                    largestPile = pileSize;
+                }
+            }
+        }
+
+        turnRight(roomba);
+        roomba.move();
+        turnRight(roomba);
+        while(roomba.frontIsClear()){
+            roomba.move();
+            int pileSize = 0;
+            while(roomba.nextToABeeper()){
+                roomba.pickBeeper();
+                totalBeepers++;
+                pileSize++;
+            }
+            if (pileSize > 0) {
+                numPiles++;
+                if (pileSize > largestPile) {
+                    largestPile = pileSize;
+                }
+            }
+        }
+         roomba.turnLeft();
+        roomba.move();
+        roomba.turnLeft();
+        while(roomba.frontIsClear()){
+            roomba.move();
+            int pileSize = 0;
+            while(roomba.nextToABeeper()){
+                roomba.pickBeeper();
+                totalBeepers++;
+                pileSize++;
+            }
+            if (pileSize > 0) {
+                numPiles++;
+                if (pileSize > largestPile) {
+                    largestPile = pileSize;
+                }
+            }
+        }
+
+        turnRight(roomba);
+        roomba.move();
+        turnRight(roomba);
+        while(roomba.frontIsClear()){
+            roomba.move();
+            int pileSize = 0;
+            while(roomba.nextToABeeper()){
+                roomba.pickBeeper();
+                totalBeepers++;
+                pileSize++;
+            }
+            if (pileSize > 0) {
+                numPiles++;
+                if (pileSize > largestPile) {
+                    largestPile = pileSize;
+                }
+            }
+        }
+
+
+        
+       
         /** This section will have all the logic that takes the Robot to every location
          * and cleans up all piles of beepers. Think about ways you can break this
          * large, complex task into smaller, easier to solve problems.
@@ -87,4 +560,3 @@ public class Roomba implements Directions {
         roomba.turnLeft();
     }
 }
-
