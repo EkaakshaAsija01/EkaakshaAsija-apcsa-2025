@@ -20,7 +20,6 @@ public class Roomba implements Directions {
 
     // You will need to add many variables!!
 
-
     public int cleanRoom(String worldName, int startX, int startY) {
 
         // A new Robot should be constructed and assigned to the global (instance) variable named roomba that is declared above.
@@ -30,510 +29,59 @@ public class Roomba implements Directions {
         World.setVisible(true);
         roomba = new Robot(startX, startY, East, 0);
 
-        int totalBeepers = 0;
+        int totalBeepers = 0; // defining what our starting values are.
         int numPiles = 0;
         int largestPile = 0;
 
-        while(roomba.frontIsClear()){
-            roomba.move();
+        while (true) { // while true to keep this chunk of code running forever.
+            while(roomba.frontIsClear()){
+                roomba.move();  //while loop to increase pille size
+                int pileSize = 0;
+                while(roomba.nextToABeeper()){
+                    roomba.pickBeeper();
+                    totalBeepers++;
+                    pileSize++;
+                }
+                if (pileSize > 0) { // put this in the while loop so it keeps updating until the end. Also this determines
+                    numPiles++;
+                    if (pileSize > largestPile) {
+                        largestPile = pileSize;
+                    }
+                }
+            }
             int pileSize = 0;
-            while(roomba.nextToABeeper()){
+            while(roomba.nextToABeeper()){ // this chunk is for pilsize. if it picks up the beeper, it adds to the total amt of beepers and adds 1 to the pile size.
                 roomba.pickBeeper();
                 totalBeepers++;
                 pileSize++;
             }
             if (pileSize > 0) {
-                numPiles++;
+                numPiles++; //this is for finding the largest pilesize possible.
                 if (pileSize > largestPile) {
                     largestPile = pileSize;
                 }
             }
-        }
-
-        roomba.turnLeft();
-        roomba.move();
-        roomba.turnLeft();
-        while(roomba.frontIsClear()){
-            roomba.move();
-            int pileSize = 0;
-            while(roomba.nextToABeeper()){
-                roomba.pickBeeper();
-                totalBeepers++;
-                pileSize++;
-            }
-            if (pileSize > 0) {
-                numPiles++;
-                if (pileSize > largestPile) {
-                    largestPile = pileSize;
+            if (!roomba.frontIsClear() && roomba.facingEast()) {
+                roomba.turnLeft();
+                if (roomba.frontIsClear()) { //to keep it going in the right direction.
+                    roomba.move();
+                    roomba.turnLeft();
+                } else {
+                    break;
                 }
             }
-        }
-
-        turnRight(roomba);
-        roomba.move();
-        turnRight(roomba);
-        while(roomba.frontIsClear()){
-            roomba.move();
-            int pileSize = 0;
-            while(roomba.nextToABeeper()){
-                roomba.pickBeeper();
-                totalBeepers++;
-                pileSize++;
-            }
-            if (pileSize > 0) {
-                numPiles++;
-                if (pileSize > largestPile) {
-                    largestPile = pileSize;
+            if (!roomba.frontIsClear() && roomba.facingWest()) {
+                turnRight(roomba);
+                if (roomba.frontIsClear()) {
+                    roomba.move(); // same purpose as the if statement above but for the other direction.
+                    turnRight(roomba);
+                } else {
+                    break;
                 }
             }
-        }
-
-        roomba.turnLeft();
-        roomba.move();
-        roomba.turnLeft();
-        while(roomba.frontIsClear()){
-            roomba.move();
-            int pileSize = 0;
-            while(roomba.nextToABeeper()){
-                roomba.pickBeeper();
-                totalBeepers++;
-                pileSize++;
-            }
-            if (pileSize > 0) {
-                numPiles++;
-                if (pileSize > largestPile) {
-                    largestPile = pileSize;
-                }
-            }
-        }
-
-        turnRight(roomba);
-        roomba.move();
-        turnRight(roomba);
-        while(roomba.frontIsClear()){
-            roomba.move();
-            int pileSize = 0;
-            while(roomba.nextToABeeper()){
-                roomba.pickBeeper();
-                totalBeepers++;
-                pileSize++;
-            }
-            if (pileSize > 0) {
-                numPiles++;
-                if (pileSize > largestPile) {
-                    largestPile = pileSize;
-                }
-            }
-        }
-        roomba.turnLeft();
-        roomba.move();
-        roomba.turnLeft();
-        while(roomba.frontIsClear()){
-            roomba.move();
-            int pileSize = 0;
-            while(roomba.nextToABeeper()){
-                roomba.pickBeeper();
-                totalBeepers++;
-                pileSize++;
-            }
-            if (pileSize > 0) {
-                numPiles++;
-                if (pileSize > largestPile) {
-                    largestPile = pileSize;
-                }
-            }
-        }
-
-        turnRight(roomba);
-        roomba.move();
-        turnRight(roomba);
-        while(roomba.frontIsClear()){
-            roomba.move();
-            int pileSize = 0;
-            while(roomba.nextToABeeper()){
-                roomba.pickBeeper();
-                totalBeepers++;
-                pileSize++;
-            }
-            if (pileSize > 0) {
-                numPiles++;
-                if (pileSize > largestPile) {
-                    largestPile = pileSize;
-                }
-            }
-        }
-
-        roomba.turnLeft();
-        roomba.move();
-        roomba.turnLeft();
-        while(roomba.frontIsClear()){
-            roomba.move();
-            int pileSize = 0;
-            while(roomba.nextToABeeper()){
-                roomba.pickBeeper();
-                totalBeepers++;
-                pileSize++;
-            }
-            if (pileSize > 0) {
-                numPiles++;
-                if (pileSize > largestPile) {
-                    largestPile = pileSize;
-                }
-            }
-        }
-
-        turnRight(roomba);
-        roomba.move();
-        turnRight(roomba);
-        while(roomba.frontIsClear()){
-            roomba.move();
-            int pileSize = 0;
-            while(roomba.nextToABeeper()){
-                roomba.pickBeeper();
-                totalBeepers++;
-                pileSize++;
-            }
-            if (pileSize > 0) {
-                numPiles++;
-                if (pileSize > largestPile) {
-                    largestPile = pileSize;
-                }
-            }
-        }
-        roomba.turnLeft();
-        roomba.move();
-        roomba.turnLeft();
-        while(roomba.frontIsClear()){
-            roomba.move();
-            int pileSize = 0;
-            while(roomba.nextToABeeper()){
-                roomba.pickBeeper();
-                totalBeepers++;
-                pileSize++;
-            }
-            if (pileSize > 0) {
-                numPiles++;
-                if (pileSize > largestPile) {
-                    largestPile = pileSize;
-                }
-            }
-        }
-
-        turnRight(roomba);
-        roomba.move();
-        turnRight(roomba);
-        while(roomba.frontIsClear()){
-            roomba.move();
-            int pileSize = 0;
-            while(roomba.nextToABeeper()){
-                roomba.pickBeeper();
-                totalBeepers++;
-                pileSize++;
-            }
-            if (pileSize > 0) {
-                numPiles++;
-                if (pileSize > largestPile) {
-                    largestPile = pileSize;
-                }
-            }
-        }
-
-        roomba.turnLeft();
-        roomba.move();
-        roomba.turnLeft();
-        while(roomba.frontIsClear()){
-            roomba.move();
-            int pileSize = 0;
-            while(roomba.nextToABeeper()){
-                roomba.pickBeeper();
-                totalBeepers++;
-                pileSize++;
-            }
-            if (pileSize > 0) {
-                numPiles++;
-                if (pileSize > largestPile) {
-                    largestPile = pileSize;
-                }
-            }
-        }
-
-        turnRight(roomba);
-        roomba.move();
-        turnRight(roomba);
-        while(roomba.frontIsClear()){
-            roomba.move();
-            int pileSize = 0;
-            while(roomba.nextToABeeper()){
-                roomba.pickBeeper();
-                totalBeepers++;
-                pileSize++;
-            }
-            if (pileSize > 0) {
-                numPiles++;
-                if (pileSize > largestPile) {
-                    largestPile = pileSize;
-                }
-            }
-        }
-        roomba.turnLeft();
-        roomba.move();
-        roomba.turnLeft();
-        while(roomba.frontIsClear()){
-            roomba.move();
-            int pileSize = 0;
-            while(roomba.nextToABeeper()){
-                roomba.pickBeeper();
-                totalBeepers++;
-                pileSize++;
-            }
-            if (pileSize > 0) {
-                numPiles++;
-                if (pileSize > largestPile) {
-                    largestPile = pileSize;
-                }
-            }
-        }
-
-        turnRight(roomba);
-        roomba.move();
-        turnRight(roomba);
-        while(roomba.frontIsClear()){
-            roomba.move();
-            int pileSize = 0;
-            while(roomba.nextToABeeper()){
-                roomba.pickBeeper();
-                totalBeepers++;
-                pileSize++;
-            }
-            if (pileSize > 0) {
-                numPiles++;
-                if (pileSize > largestPile) {
-                    largestPile = pileSize;
-                }
-            }
-        }
-
-        roomba.turnLeft();
-        roomba.move();
-        roomba.turnLeft();
-        while(roomba.frontIsClear()){
-            roomba.move();
-            int pileSize = 0;
-            while(roomba.nextToABeeper()){
-                roomba.pickBeeper();
-                totalBeepers++;
-                pileSize++;
-            }
-            if (pileSize > 0) {
-                numPiles++;
-                if (pileSize > largestPile) {
-                    largestPile = pileSize;
-                }
-            }
-        }
-
-        turnRight(roomba);
-        roomba.move();
-        turnRight(roomba);
-        while(roomba.frontIsClear()){
-            roomba.move();
-            int pileSize = 0;
-            while(roomba.nextToABeeper()){
-                roomba.pickBeeper();
-                totalBeepers++;
-                pileSize++;
-            }
-            if (pileSize > 0) {
-                numPiles++;
-                if (pileSize > largestPile) {
-                    largestPile = pileSize;
-                }
-            }
-        }
-         roomba.turnLeft();
-        roomba.move();
-        roomba.turnLeft();
-        while(roomba.frontIsClear()){
-            roomba.move();
-            int pileSize = 0;
-            while(roomba.nextToABeeper()){
-                roomba.pickBeeper();
-                totalBeepers++;
-                pileSize++;
-            }
-            if (pileSize > 0) {
-                numPiles++;
-                if (pileSize > largestPile) {
-                    largestPile = pileSize;
-                }
-            }
-        }
-
-        turnRight(roomba);
-        roomba.move();
-        turnRight(roomba);
-        while(roomba.frontIsClear()){
-            roomba.move();
-            int pileSize = 0;
-            while(roomba.nextToABeeper()){
-                roomba.pickBeeper();
-                totalBeepers++;
-                pileSize++;
-            }
-            if (pileSize > 0) {
-                numPiles++;
-                if (pileSize > largestPile) {
-                    largestPile = pileSize;
-                }
-            }
-        }
-         roomba.turnLeft();
-        roomba.move();
-        roomba.turnLeft();
-        while(roomba.frontIsClear()){
-            roomba.move();
-            int pileSize = 0;
-            while(roomba.nextToABeeper()){
-                roomba.pickBeeper();
-                totalBeepers++;
-                pileSize++;
-            }
-            if (pileSize > 0) {
-                numPiles++;
-                if (pileSize > largestPile) {
-                    largestPile = pileSize;
-                }
-            }
-        }
-
-        turnRight(roomba);
-        roomba.move();
-        turnRight(roomba);
-        while(roomba.frontIsClear()){
-            roomba.move();
-            int pileSize = 0;
-            while(roomba.nextToABeeper()){
-                roomba.pickBeeper();
-                totalBeepers++;
-                pileSize++;
-            }
-            if (pileSize > 0) {
-                numPiles++;
-                if (pileSize > largestPile) {
-                    largestPile = pileSize;
-                }
-            }
-        }
-         roomba.turnLeft();
-        roomba.move();
-        roomba.turnLeft();
-        while(roomba.frontIsClear()){
-            roomba.move();
-            int pileSize = 0;
-            while(roomba.nextToABeeper()){
-                roomba.pickBeeper();
-                totalBeepers++;
-                pileSize++;
-            }
-            if (pileSize > 0) {
-                numPiles++;
-                if (pileSize > largestPile) {
-                    largestPile = pileSize;
-                }
-            }
-        }
-
-        turnRight(roomba);
-        roomba.move();
-        turnRight(roomba);
-        while(roomba.frontIsClear()){
-            roomba.move();
-            int pileSize = 0;
-            while(roomba.nextToABeeper()){
-                roomba.pickBeeper();
-                totalBeepers++;
-                pileSize++;
-            }
-            if (pileSize > 0) {
-                numPiles++;
-                if (pileSize > largestPile) {
-                    largestPile = pileSize;
-                }
-            }
-        }
-         roomba.turnLeft();
-        roomba.move();
-        roomba.turnLeft();
-        while(roomba.frontIsClear()){
-            roomba.move();
-            int pileSize = 0;
-            while(roomba.nextToABeeper()){
-                roomba.pickBeeper();
-                totalBeepers++;
-                pileSize++;
-            }
-            if (pileSize > 0) {
-                numPiles++;
-                if (pileSize > largestPile) {
-                    largestPile = pileSize;
-                }
-            }
-        }
-
-        turnRight(roomba);
-        roomba.move();
-        turnRight(roomba);
-        while(roomba.frontIsClear()){
-            roomba.move();
-            int pileSize = 0;
-            while(roomba.nextToABeeper()){
-                roomba.pickBeeper();
-                totalBeepers++;
-                pileSize++;
-            }
-            if (pileSize > 0) {
-                numPiles++;
-                if (pileSize > largestPile) {
-                    largestPile = pileSize;
-                }
-            }
-        }
-         roomba.turnLeft();
-        roomba.move();
-        roomba.turnLeft();
-        while(roomba.frontIsClear()){
-            roomba.move();
-            int pileSize = 0;
-            while(roomba.nextToABeeper()){
-                roomba.pickBeeper();
-                totalBeepers++;
-                pileSize++;
-            }
-            if (pileSize > 0) {
-                numPiles++;
-                if (pileSize > largestPile) {
-                    largestPile = pileSize;
-                }
-            }
-        }
-
-        turnRight(roomba);
-        roomba.move();
-        turnRight(roomba);
-        while(roomba.frontIsClear()){
-            roomba.move();
-            int pileSize = 0;
-            while(roomba.nextToABeeper()){
-                roomba.pickBeeper();
-                totalBeepers++;
-                pileSize++;
-            }
-            if (pileSize > 0) {
-                numPiles++;
-                if (pileSize > largestPile) {
-                    largestPile = pileSize;
-                }
-            }
+            if (!roomba.frontIsClear() && !roomba.facingEast() && !roomba.facingWest()) {
+                break;
+            } // this was just to break after the roomba cleans everything
         }
 
 
