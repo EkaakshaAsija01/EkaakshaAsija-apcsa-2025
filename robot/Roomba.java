@@ -8,10 +8,10 @@ public class Roomba implements Directions {
     public static void main(String[] args) {
         // LEAVE THIS ALONE!!!!!!
         //String worldName = "robot/basicRoom.wld";
-        String worldName = "robot/TestWorld-1.wld";
+        String worldName = "robot/basicRoom.wld";
         World.setDelay(1);
         Roomba cleaner = new Roomba();
-        int totalBeepers = cleaner.cleanRoom(worldName, 25, 13);
+        int totalBeepers = cleaner.cleanRoom(worldName, 7, 6);
         System.out.println("Roomba cleaned up a total of " + totalBeepers + " beepers.");  
     }
 
@@ -32,11 +32,16 @@ public class Roomba implements Directions {
         int totalBeepers = 0; // defining what our starting values are.
         int numPiles = 0;
         int largestPile = 0;
+        int unitsSquared = 0;
+        boolean firstRound = true; // We get an extra row so we need to get rid of it. Working with Sree we created an integer to help remove that row.
+        int largestPileLocationX = 0;
+        int largestPileLocationY = 0;
 
         while (true) { // while true to keep this chunk of code running forever.
             while(roomba.frontIsClear()){
                 roomba.move();  //while loop to increase pille size
                 int pileSize = 0;
+                unitsSquared++; //whenever it moves add to area
                 while(roomba.nextToABeeper()){
                     roomba.pickBeeper();
                     totalBeepers++;
@@ -66,6 +71,10 @@ public class Roomba implements Directions {
                 if (roomba.frontIsClear()) { //to keep it going in the right direction.
                     roomba.move();
                     roomba.turnLeft();
+                    if(firstRound){ //this runs after the firstRound as in the bottom row has been completed when this is completed, it resets the first round to false so it never runs again.
+                        unitsSquared = 0;
+                        firstRound = false;
+                    }
                 } else {
                     break;
                 }
@@ -97,7 +106,7 @@ public class Roomba implements Directions {
 
         System.out.println("Number of piles: " + numPiles);
         System.out.println("Largest pile size: " + largestPile);
-
+        System.out.println("Total area is "+ unitsSquared + " units squared" );
         // This method should return the total number of beepers cleaned up.
         return totalBeepers;
     }
