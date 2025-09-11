@@ -34,9 +34,9 @@ public class Roomba implements Directions {
         int largestPile = 0;
         int unitsSquared = 0;
         boolean firstRound = true; // We get an extra row so we need to get rid of it. Working with Sree we created an integer to help remove that row.
-        int largestPileLocationX = 0;
-        int largestPileLocationY = 0;
-
+        //int largestPileLocationX = 0;
+       // int largestPileLocationY = 0;
+       
         while (true) { // while true to keep this chunk of code running forever.
             while(roomba.frontIsClear()){
                 roomba.move();  //while loop to increase pille size
@@ -92,6 +92,7 @@ public class Roomba implements Directions {
                 break;
             } // this was just to break after the roomba cleans everything
         }
+         double PercentageDirty= (double)numPiles/unitsSquared; // this is to find the percent dirty, the line below is for the 
 
 
         
@@ -107,6 +108,7 @@ public class Roomba implements Directions {
         System.out.println("Number of piles: " + numPiles);
         System.out.println("Largest pile size: " + largestPile);
         System.out.println("Total area is "+ unitsSquared + " units squared" );
+        System.out.println("The percentage dirty is "+ PercentageDirty);
         // This method should return the total number of beepers cleaned up.
         return totalBeepers;
     }
