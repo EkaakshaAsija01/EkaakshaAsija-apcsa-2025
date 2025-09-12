@@ -4,7 +4,6 @@ import kareltherobot.*;
 
 public class Roomba implements Directions {
 
-    // Main method to make this self-contained
     public static void main(String[] args) {
         // LEAVE THIS ALONE!!!!!!
         //String worldName = "robot/basicRoom.wld";
@@ -15,15 +14,9 @@ public class Roomba implements Directions {
         System.out.println("Roomba cleaned up a total of " + totalBeepers + " beepers.");  
     }
 
-    // declared here so it is visible in all the methods!
     private Robot roomba;
 
-    // You will need to add many variables!!
-
     public int cleanRoom(String worldName, int startX, int startY) {
-
-        // A new Robot should be constructed and assigned to the global (instance) variable named roomba that is declared above.
-        // Make sure it starts at startX and startY location.
 
         World.readWorld(worldName);
         World.setVisible(true);
@@ -33,19 +26,36 @@ public class Roomba implements Directions {
         int numPiles = 0;
         int largestPile = 0;
         int unitsSquared = 0;
-        boolean firstRound = true; // We get an extra row so we need to get rid of it. Working with Sree we created an integer to help remove that row.
-        //int largestPileLocationX = 0;
-       // int largestPileLocationY = 0;
-       
-        while (true) { // while true to keep this chunk of code running forever.
+        int UnitsMovedToFindMax = 0;
+        int UnitsMovedToFindMaxMax = 0;
+
+        // Clean starting square
+        int pileSize = 0;
+        while (roomba.nextToABeeper()) {
+            roomba.pickBeeper();
+            totalBeepers++;
+            pileSize++;
+            UnitsMovedToFindMax++;
+
+        }
+        if (pileSize > 0) {
+            numPiles++;
+            if (pileSize > largestPile) {
+                largestPile = pileSize;
+            }
+        }
+        unitsSquared++; // Count starting square
+
+        while (true) {
             while(roomba.frontIsClear()){
                 roomba.move();  //while loop to increase pille size
-                int pileSize = 0;
                 unitsSquared++; //whenever it moves add to area
+                pileSize = 0;
                 while(roomba.nextToABeeper()){
                     roomba.pickBeeper();
                     totalBeepers++;
                     pileSize++;
+                    UnitsMovedToFindMax++;
                 }
                 if (pileSize > 0) { // put this in the while loop so it keeps updating until the end. Also this determines
                     numPiles++;
@@ -54,7 +64,7 @@ public class Roomba implements Directions {
                     }
                 }
             }
-            int pileSize = 0;
+            pileSize = 0;
             while(roomba.nextToABeeper()){ // this chunk is for pilsize. if it picks up the beeper, it adds to the total amt of beepers and adds 1 to the pile size.
                 roomba.pickBeeper();
                 totalBeepers++;
@@ -70,11 +80,9 @@ public class Roomba implements Directions {
                 roomba.turnLeft();
                 if (roomba.frontIsClear()) { //to keep it going in the right direction.
                     roomba.move();
+                    unitsSquared++; // Count the square you move to at row start
                     roomba.turnLeft();
-                    if(firstRound){ //this runs after the firstRound as in the bottom row has been completed when this is completed, it resets the first round to false so it never runs again.
-                        unitsSquared = 0;
-                        firstRound = false;
-                    }
+
                 } else {
                     break;
                 }
@@ -83,6 +91,7 @@ public class Roomba implements Directions {
                 turnRight(roomba);
                 if (roomba.frontIsClear()) {
                     roomba.move(); // same purpose as the if statement above but for the other direction.
+                    unitsSquared++; // Count the square you move to at row start
                     turnRight(roomba);
                 } else {
                     break;
@@ -92,23 +101,17 @@ public class Roomba implements Directions {
                 break;
             } // this was just to break after the roomba cleans everything
         }
-         double PercentageDirty= (double)numPiles/unitsSquared; // this is to find the percent dirty, the line below is for the 
-
-
+        double PercentageDirty= (double)numPiles/unitsSquared; // this is to find the percent dirty
+        double AveragePileSize= (double)totalBeepers/numPiles; // this is for average pile size.
+    
+        // this was just so i could commit.
         
-       // this was just so i could commit.
-        /** This section will have all the logic that takes the Robot to every location
-         * and cleans up all piles of beepers. Think about ways you can break this
-         * large, complex task into smaller, easier to solve problems.
-         */
-
-        // the line below causes a null pointer exception
-        // what is that and why are we getting it?
-
+        
         System.out.println("Number of piles: " + numPiles);
         System.out.println("Largest pile size: " + largestPile);
         System.out.println("Total area is "+ unitsSquared + " units squared" );
         System.out.println("The percentage dirty is "+ PercentageDirty);
+        System.out.println("The average Pile Size was " +  AveragePileSize);
         // This method should return the total number of beepers cleaned up.
         return totalBeepers;
     }
