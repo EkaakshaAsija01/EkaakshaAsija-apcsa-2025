@@ -42,6 +42,7 @@ public class Roomba implements Directions {
             numPiles++;
             if (pileSize > largestPile) {
                 largestPile = pileSize;
+                UnitsMovedToFindMaxMax = UnitsMovedToFindMax; 
             }
         }
         unitsSquared++; // Count starting square
@@ -57,10 +58,11 @@ public class Roomba implements Directions {
                     pileSize++;
                     UnitsMovedToFindMax++;
                 }
-                if (pileSize > 0) { // put this in the while loop so it keeps updating until the end. Also this determines
+                if (pileSize > 0) { // put this in the while loop so it keeps updating until the end. 
                     numPiles++;
                     if (pileSize > largestPile) {
                         largestPile = pileSize;
+                        UnitsMovedToFindMaxMax = UnitsMovedToFindMax; // FIXED HERE
                     }
                 }
             }
@@ -69,11 +71,13 @@ public class Roomba implements Directions {
                 roomba.pickBeeper();
                 totalBeepers++;
                 pileSize++;
+                UnitsMovedToFindMax++;
             }
             if (pileSize > 0) {
                 numPiles++; //this is for finding the largest pilesize possible.
                 if (pileSize > largestPile) {
                     largestPile = pileSize;
+                    UnitsMovedToFindMaxMax = UnitsMovedToFindMax; // FIXED HERE, just in case there's a pile at the end
                 }
             }
             if (!roomba.frontIsClear() && roomba.facingEast()) {
@@ -113,6 +117,7 @@ public class Roomba implements Directions {
         System.out.println("The percentage dirty is "+ PercentageDirty);
         System.out.println("The average Pile Size was " +  AveragePileSize);
         // This method should return the total number of beepers cleaned up.
+        System.out.println("The amount of units the robot had to move to find the max pile was " + UnitsMovedToFindMaxMax);
         return totalBeepers;
     }
 
