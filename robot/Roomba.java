@@ -6,11 +6,11 @@ public class Roomba implements Directions {
 
     public static void main(String[] args) {
         // LEAVE THIS ALONE!!!!!!
-        //String worldName = "robot/basicRoom.wld";
-        String worldName = "robot/TestWorld-2.wld";
+        //String worldName = "robot/finalTestWorld2024.wld";
+        String worldName = "robot/finalTestWorld2024.wld";
         World.setDelay(0);
         Roomba cleaner = new Roomba();
-        int totalBeepers = cleaner.cleanRoom(worldName, 5, 6);
+        int totalBeepers = cleaner.cleanRoom(worldName, 26, 101);
         System.out.println("Roomba cleaned up a total of " + totalBeepers + " beepers.");  
     }
 
@@ -36,7 +36,6 @@ public class Roomba implements Directions {
             totalBeepers++;
             pileSize++;
             UnitsMovedToFindMax++;
-
         }
         if (pileSize > 0) {
             numPiles++;
@@ -86,8 +85,22 @@ public class Roomba implements Directions {
                     roomba.move();
                     unitsSquared++; // Count the square you move to at row start
                     roomba.turnLeft();
-
                 } else {
+                    // Added this block so it checks for a pile after the last move before breaking.
+                    pileSize = 0;
+                    while (roomba.nextToABeeper()) { // this will catch a pile if it's at the very end
+                        roomba.pickBeeper();
+                        totalBeepers++;
+                        pileSize++;
+                        UnitsMovedToFindMax++;
+                    }
+                    if (pileSize > 0) {
+                        numPiles++;
+                        if (pileSize > largestPile) {
+                            largestPile = pileSize;
+                            UnitsMovedToFindMaxMax = UnitsMovedToFindMax;
+                        }
+                    }
                     break; // I put break so it would stop before it hit a wall at the end and crashed.
                 }
             }
@@ -98,10 +111,40 @@ public class Roomba implements Directions {
                     unitsSquared++; // Count the square you move to at row start
                     turnRight(roomba);
                 } else {
+                    // Added this block so it checks for a pile after the last move before breaking.
+                    pileSize = 0;
+                    while (roomba.nextToABeeper()) {
+                        roomba.pickBeeper();
+                        totalBeepers++;
+                        pileSize++;
+                        UnitsMovedToFindMax++;
+                    }
+                    if (pileSize > 0) {
+                        numPiles++;
+                        if (pileSize > largestPile) {
+                            largestPile = pileSize;
+                            UnitsMovedToFindMaxMax = UnitsMovedToFindMax;
+                        }
+                    }
                     break;
                 }
             }
             if (!roomba.frontIsClear() && !roomba.facingEast() && !roomba.facingWest()) {
+                // Added this block so it checks for a pile after the last move before breaking.
+                pileSize = 0;
+                while (roomba.nextToABeeper()) {
+                    roomba.pickBeeper();
+                    totalBeepers++;
+                    pileSize++;
+                    UnitsMovedToFindMax++;
+                }
+                if (pileSize > 0) {
+                    numPiles++;
+                    if (pileSize > largestPile) {
+                        largestPile = pileSize;
+                        UnitsMovedToFindMaxMax = UnitsMovedToFindMax;
+                    }
+                }
                 break;
             } // this was just to break after the roomba cleans everything
         }
