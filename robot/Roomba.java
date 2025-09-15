@@ -26,7 +26,7 @@ public class Roomba implements Directions {
         int numPiles = 0;
         int largestPile = 0;
         int unitsSquared = 0;
-        int UnitsMovedToFindMax = 0;
+        int UnitsMovedToFindMax = 0; //I literally just did  something similar to the pileSize and LargestPile code.
         int UnitsMovedToFindMaxMax = 0;
 
         // Clean starting square
@@ -42,7 +42,7 @@ public class Roomba implements Directions {
             numPiles++;
             if (pileSize > largestPile) {
                 largestPile = pileSize;
-                UnitsMovedToFindMaxMax = UnitsMovedToFindMax; 
+                UnitsMovedToFindMaxMax = UnitsMovedToFindMax; //similar to the pile size finder.
             }
         }
         unitsSquared++; // Count starting square
