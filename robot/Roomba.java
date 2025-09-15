@@ -7,10 +7,10 @@ public class Roomba implements Directions {
     public static void main(String[] args) {
         // LEAVE THIS ALONE!!!!!!
         //String worldName = "robot/basicRoom.wld";
-        String worldName = "robot/basicRoom.wld";
-        World.setDelay(1);
+        String worldName = "robot/TestWorld-2.wld";
+        World.setDelay(0);
         Roomba cleaner = new Roomba();
-        int totalBeepers = cleaner.cleanRoom(worldName, 7, 6);
+        int totalBeepers = cleaner.cleanRoom(worldName, 5, 6);
         System.out.println("Roomba cleaned up a total of " + totalBeepers + " beepers.");  
     }
 
@@ -88,7 +88,7 @@ public class Roomba implements Directions {
                     roomba.turnLeft();
 
                 } else {
-                    break;
+                    break; // I put break so it would stop before it hit a wall at the end and crashed.
                 }
             }
             if (!roomba.frontIsClear() && roomba.facingWest()) {
@@ -109,7 +109,7 @@ public class Roomba implements Directions {
         double AveragePileSize= (double)totalBeepers/numPiles; // this is for average pile size.
     
         // this was just so i could commit.
-        
+        // the code below should print out whatever statistics I need. 
         
         System.out.println("Number of piles: " + numPiles);
         System.out.println("Largest pile size: " + largestPile);
@@ -121,7 +121,7 @@ public class Roomba implements Directions {
         return totalBeepers;
     }
 
-    public static void turnRight(Robot roomba){
+    public static void turnRight(Robot roomba){ // this is a method to turn right. I got it from Anish.
         roomba.turnLeft();
         roomba.turnLeft();
         roomba.turnLeft();
