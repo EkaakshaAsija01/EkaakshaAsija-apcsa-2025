@@ -21,116 +21,126 @@ public class Roomba implements Directions {
         World.readWorld(worldName);
         World.setVisible(true);
         roomba = new Robot(startX, startY, East, 0);
+ int totalBeepers = 0; // defining what our starting values are.
+    int numPiles = 0;
+    int largestPile = 0;
+    int unitsSquared = 0;
+    int UnitsMovedToFindMax = 0; //I literally just did  something similar to the pileSize and LargestPile code.
+    int UnitsMovedToFindMaxMax = 0;
 
-        int totalBeepers = 0; // defining what our starting values are.
-        int numPiles = 0;
-        int largestPile = 0;
-        int unitsSquared = 0;
-        int UnitsMovedToFindMax = 0; //I literally just did  something similar to the pileSize and LargestPile code.
-        int UnitsMovedToFindMaxMax = 0;
+    // Clean starting square
+    int pileSize = 0;
+    while (roomba.nextToABeeper()) {
+        roomba.pickBeeper();
+        totalBeepers++;
+        pileSize++;
+        UnitsMovedToFindMax++;
+    }
+    if (pileSize > 0) {
+        numPiles++;
+        if (pileSize > largestPile) {
+            largestPile = pileSize;
+            UnitsMovedToFindMaxMax = UnitsMovedToFindMax; //similar to the pile size finder.
+        }
+    }
+    unitsSquared++; // Count starting square
 
-        // Clean starting square
-        int pileSize = 0;
-        while (roomba.nextToABeeper()) {
+    while (true) {
+        while(roomba.frontIsClear()){
+            roomba.move();  //while loop to increase pille size
+            unitsSquared++; //whenever it moves add to area
+            pileSize = 0;
+            while(roomba.nextToABeeper()){
+                roomba.pickBeeper();
+                totalBeepers++;
+                pileSize++;
+                UnitsMovedToFindMax++;
+            }
+            if (pileSize > 0) { // put this in the while loop so it keeps updating until the end. 
+                numPiles++;
+                if (pileSize > largestPile) {
+                    largestPile = pileSize;
+                    UnitsMovedToFindMaxMax = UnitsMovedToFindMax; // FIXED HERE
+                }
+            }
+        }
+        pileSize = 0;
+        while(roomba.nextToABeeper()){ // this chunk is for pilsize. if it picks up the beeper, it adds to the total amt of beepers and adds 1 to the pile size.
             roomba.pickBeeper();
             totalBeepers++;
             pileSize++;
             UnitsMovedToFindMax++;
         }
         if (pileSize > 0) {
-            numPiles++;
+            numPiles++; //this is for finding the largest pilesize possible.
             if (pileSize > largestPile) {
                 largestPile = pileSize;
-                UnitsMovedToFindMaxMax = UnitsMovedToFindMax; //similar to the pile size finder.
+                UnitsMovedToFindMaxMax = UnitsMovedToFindMax; // FIXED HERE, just in case there's a pile at the end
             }
         }
-        unitsSquared++; // Count starting square
+        if (!roomba.frontIsClear() && roomba.facingEast()) {
+            roomba.turnLeft();
+            if (roomba.frontIsClear()) { //to keep it going in the right direction.
+                roomba.move();
+                unitsSquared++; // Count the square you move to at row start
 
-        while (true) {
-            while(roomba.frontIsClear()){
-                roomba.move();  //while loop to increase pille size
-                unitsSquared++; //whenever it moves add to area
                 pileSize = 0;
-                while(roomba.nextToABeeper()){
+                while (roomba.nextToABeeper()) {
                     roomba.pickBeeper();
                     totalBeepers++;
                     pileSize++;
                     UnitsMovedToFindMax++;
                 }
-                if (pileSize > 0) { // put this in the while loop so it keeps updating until the end. 
+                if (pileSize > 0) {
                     numPiles++;
                     if (pileSize > largestPile) {
                         largestPile = pileSize;
-                        UnitsMovedToFindMaxMax = UnitsMovedToFindMax; // FIXED HERE
+                        UnitsMovedToFindMaxMax = UnitsMovedToFindMax;
                     }
                 }
-            }
-            pileSize = 0;
-            while(roomba.nextToABeeper()){ // this chunk is for pilsize. if it picks up the beeper, it adds to the total amt of beepers and adds 1 to the pile size.
-                roomba.pickBeeper();
-                totalBeepers++;
-                pileSize++;
-                UnitsMovedToFindMax++;
-            }
-            if (pileSize > 0) {
-                numPiles++; //this is for finding the largest pilesize possible.
-                if (pileSize > largestPile) {
-                    largestPile = pileSize;
-                    UnitsMovedToFindMaxMax = UnitsMovedToFindMax; // FIXED HERE, just in case there's a pile at the end
-                }
-            }
-            if (!roomba.frontIsClear() && roomba.facingEast()) {
+
                 roomba.turnLeft();
-                if (roomba.frontIsClear()) { //to keep it going in the right direction.
-                    roomba.move();
-                    unitsSquared++; // Count the square you move to at row start
-                    roomba.turnLeft();
-                } else {
-                    // Added this block so it checks for a pile after the last move before breaking.
-                    pileSize = 0;
-                    while (roomba.nextToABeeper()) { // this will catch a pile if it's at the very end
-                        roomba.pickBeeper();
-                        totalBeepers++;
-                        pileSize++;
-                        UnitsMovedToFindMax++;
-                    }
-                    if (pileSize > 0) {
-                        numPiles++;
-                        if (pileSize > largestPile) {
-                            largestPile = pileSize;
-                            UnitsMovedToFindMaxMax = UnitsMovedToFindMax;
-                        }
-                    }
-                    break; // I put break so it would stop before it hit a wall at the end and crashed.
+            } else {
+                pileSize = 0;
+                while (roomba.nextToABeeper()) { 
+                    roomba.pickBeeper();
+                    totalBeepers++;
+                    pileSize++;
+                    UnitsMovedToFindMax++;
                 }
+                if (pileSize > 0) {
+                    numPiles++;
+                    if (pileSize > largestPile) {
+                        largestPile = pileSize;
+                        UnitsMovedToFindMaxMax = UnitsMovedToFindMax;
+                    }
+                }
+                break; // I put break so it would stop before it hit a wall at the end and crashed.
             }
-            if (!roomba.frontIsClear() && roomba.facingWest()) {
+        }
+        if (!roomba.frontIsClear() && roomba.facingWest()) {
+            turnRight(roomba);
+            if (roomba.frontIsClear()) {
+                roomba.move(); // same purpose as the if statement above but for the other direction.
+                unitsSquared++; // Count the square you move to at row start
+
+                pileSize = 0;
+                while (roomba.nextToABeeper()) {
+                    roomba.pickBeeper();
+                    totalBeepers++;
+                    pileSize++;
+                    UnitsMovedToFindMax++;
+                }
+                if (pileSize > 0) {
+                    numPiles++;
+                    if (pileSize > largestPile) {
+                        largestPile = pileSize;
+                        UnitsMovedToFindMaxMax = UnitsMovedToFindMax;
+                    }
+                }
+
                 turnRight(roomba);
-                if (roomba.frontIsClear()) {
-                    roomba.move(); // same purpose as the if statement above but for the other direction.
-                    unitsSquared++; // Count the square you move to at row start
-                    turnRight(roomba);
-                } else {
-                    // Added this block so it checks for a pile after the last move before breaking.
-                    pileSize = 0;
-                    while (roomba.nextToABeeper()) {
-                        roomba.pickBeeper();
-                        totalBeepers++;
-                        pileSize++;
-                        UnitsMovedToFindMax++;
-                    }
-                    if (pileSize > 0) {
-                        numPiles++;
-                        if (pileSize > largestPile) {
-                            largestPile = pileSize;
-                            UnitsMovedToFindMaxMax = UnitsMovedToFindMax;
-                        }
-                    }
-                    break;
-                }
-            }
-            if (!roomba.frontIsClear() && !roomba.facingEast() && !roomba.facingWest()) {
-                // Added this block so it checks for a pile after the last move before breaking.
+            } else {
                 pileSize = 0;
                 while (roomba.nextToABeeper()) {
                     roomba.pickBeeper();
@@ -146,23 +156,42 @@ public class Roomba implements Directions {
                     }
                 }
                 break;
-            } // this was just to break after the roomba cleans everything
+            }
         }
-        double PercentageDirty= (double)numPiles/unitsSquared; // this is to find the percent dirty
-        double AveragePileSize= (double)totalBeepers/numPiles; // this is for average pile size.
-    
-        // this was just so i could commit.
-        // the code below should print out whatever statistics I need. 
-        
-        System.out.println("Number of piles: " + numPiles);
-        System.out.println("Largest pile size: " + largestPile);
-        System.out.println("Total area is "+ unitsSquared + " units squared" );
-        System.out.println("The percentage dirty is "+ PercentageDirty);
-        System.out.println("The average Pile Size was " +  AveragePileSize);
-        // This method should return the total number of beepers cleaned up.
-        System.out.println("The amount of units the robot had to move to find the max pile was " + UnitsMovedToFindMaxMax);
-        return totalBeepers;
+        if (!roomba.frontIsClear() && !roomba.facingEast() && !roomba.facingWest()) {
+            pileSize = 0;
+            while (roomba.nextToABeeper()) { // I added a while loop that checks for beepers in front even while turning. I essentially just copied and pasted my code on what to do if the 
+                // front is not clear. I did the same with facingEast thing.
+                roomba.pickBeeper();
+                totalBeepers++;
+                pileSize++;
+                UnitsMovedToFindMax++;
+            }
+            if (pileSize > 0) {
+                numPiles++;
+                if (pileSize > largestPile) {
+                    largestPile = pileSize;
+                    UnitsMovedToFindMaxMax = UnitsMovedToFindMax;
+                }
+            }
+            break; // this was just to break after the roomba cleans everything
+        } 
     }
+    double PercentageDirty= (double)numPiles/unitsSquared; // this is to find the percent dirty
+    double AveragePileSize= (double)totalBeepers/numPiles; // this is for average pile size.
+    
+    // this was just so i could commit.
+    // the code below should print out whatever statistics I need. 
+        
+    System.out.println("Number of piles: " + numPiles);
+    System.out.println("Largest pile size: " + largestPile);
+    System.out.println("Total area is "+ unitsSquared + " units squared" );
+    System.out.println("The percentage dirty is "+ PercentageDirty);
+    System.out.println("The average Pile Size was " +  AveragePileSize);
+    // This method should return the total number of beepers cleaned up.
+    System.out.println("The amount of units the robot had to move to find the max pile was " + UnitsMovedToFindMaxMax);
+    return totalBeepers;
+}
 
     public static void turnRight(Robot roomba){ // this is a method to turn right. I got it from Anish.
         roomba.turnLeft();
