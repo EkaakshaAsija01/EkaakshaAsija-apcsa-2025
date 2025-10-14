@@ -32,9 +32,16 @@ public class PigLatinTranslator {
         String result = "";
 
         // TODO: Replace this code to correctly translate a single word.
-        // Start here first!
-        // This is the first place to work.
-        result = input; // delete this line
+         String result= input;
+         String first=input.substring(0,1);
+         String.vowel= "a" ||"A" || "E" || "" 
+        boolean StartsWithVowel= first.equals("a") || first.equals("A") || first.equals("e") || first.equals("E") || first.equals("i") || first.equals("I") ||first.equals("o") || first.equals("O") || first.equals("u") || first.equals("U")+ first.equals("Y"); || first.equals("y");
+        int vowelLocation = input.indexOf(vowel);
+        if (StartsWithVowel) {
+           input+="ay";
+        }
+        else if (!StartsWithVowel)
+        
 
         return result;
     }
