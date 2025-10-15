@@ -6,7 +6,7 @@ public class PigLatinTranslator {
 
         // TODO: Add code here to populate translatedBook with a translation of the
         // input book.
-        // Curent do-nothing code will return an empty book.
+        // Current do-nothing code will return an empty book.
         // Your code will need to call translate(String input) many times.
 
         return translatedBook;
@@ -30,24 +30,43 @@ public class PigLatinTranslator {
         System.out.println("  -> translateWord('" + input + "')");
 
         String result = "";
+        String first = input.substring(0, 1);
 
-        // TODO: Replace this code to correctly translate a single word.
-         String result= input;
-         String first=input.substring(0,1);
-         String.vowel= "a" ||"A" || "E" || "" 
-        boolean StartsWithVowel= first.equals("a") || first.equals("A") || first.equals("e") || first.equals("E") || first.equals("i") || first.equals("I") ||first.equals("o") || first.equals("O") || first.equals("u") || first.equals("U")+ first.equals("Y"); || first.equals("y");
-        int vowelLocation = input.indexOf(vowel);
-        if (StartsWithVowel) {
-           input+="ay";
+        boolean startsWithVowel =
+            first.equals("a") || first.equals("A") ||
+            first.equals("e") || first.equals("E") ||
+            first.equals("i") || first.equals("I") ||
+            first.equals("o") || first.equals("O") ||
+            first.equals("u") || first.equals("U");
+
+        if (startsWithVowel) {
+            result = input + "yay";
+        } else {
+            // find where the first vowel is
+            int vowelLocation = -1;
+            int i = 0;
+            while (i < input.length() && vowelLocation == -1) {
+                String letter = input.substring(i, i + 1);
+                if (letter.equals("a") || letter.equals("A") ||
+                    letter.equals("e") || letter.equals("E") ||
+                    letter.equals("i") || letter.equals("I") ||
+                    letter.equals("o") || letter.equals("O") ||
+                    letter.equals("u") || letter.equals("U")) {
+                    vowelLocation = i;
+                }
+                i = i + 1;
+            }
+
+            if (vowelLocation != -1) {
+                String start = input.substring(0, vowelLocation);
+                String end = input.substring(vowelLocation);
+                result = end + start + "ay";
+            } else {
+                // if no vowels at all
+                result = input + "ay";
+            }
         }
-        else if (!StartsWithVowel)
-        
 
         return result;
     }
-
-    // Add additonal private methods here.
-    // For example, I had one like this:
-    // private static String capitalizeFirstLetter(String input)
-
 }
