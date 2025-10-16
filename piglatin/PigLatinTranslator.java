@@ -30,7 +30,25 @@ public class PigLatinTranslator {
         System.out.println("  -> translateWord('" + input + "')");
 
         String result = "";
-        String first = input.substring(0, 1);
+
+        // handle empty strings
+        if (input.length() == 0) return input;
+
+        // handle punctuation at the end
+        String punctuation = "";
+        String last = input.substring(input.length() - 1);
+        if (!Character.isLetter(last.charAt(0))) {
+            punctuation = last;
+            input = input.substring(0, input.length() - 1);
+        }
+
+        // check if first letter is uppercase
+        boolean startsUpper = Character.isUpperCase(input.charAt(0));
+
+        // make the word lowercase to work with
+        String lower = input.toLowerCase();
+
+        String first = lower.substring(0, 1);
 
         boolean startsWithVowel =
             first.equals("a") || first.equals("A") ||
@@ -40,13 +58,13 @@ public class PigLatinTranslator {
             first.equals("u") || first.equals("U");
 
         if (startsWithVowel) {
-            result = input + "yay";
+            result = lower + "ay";
         } else {
             // find where the first vowel is
             int vowelLocation = -1;
             int i = 0;
-            while (i < input.length() && vowelLocation == -1) {
-                String letter = input.substring(i, i + 1);
+            while (i < lower.length() && vowelLocation == -1) {
+                String letter = lower.substring(i, i + 1);
                 if (letter.equals("a") || letter.equals("A") ||
                     letter.equals("e") || letter.equals("E") ||
                     letter.equals("i") || letter.equals("I") ||
@@ -58,14 +76,22 @@ public class PigLatinTranslator {
             }
 
             if (vowelLocation != -1) {
-                String start = input.substring(0, vowelLocation);
-                String end = input.substring(vowelLocation);
+                String start = lower.substring(0, vowelLocation);
+                String end = lower.substring(vowelLocation);
                 result = end + start + "ay";
             } else {
                 // if no vowels at all
-                result = input + "ay";
+                result = lower + "ay";
             }
         }
+
+        // make first letter uppercase again if original started uppercase
+        if (startsUpper && result.length() > 0) {
+            result = result.substring(0, 1).toUpperCase() + result.substring(1);
+        }
+
+        // put punctuation back
+        result = result + punctuation;
 
         return result;
     }
