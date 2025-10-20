@@ -56,7 +56,7 @@ public class PigLatinTranslator {
             first.equals("i") || first.equals("I") ||
             first.equals("o") || first.equals("O") ||
             first.equals("u") || first.equals("U");
-
+// this is so i could commit.
         if (startsWithVowel) {
             result = lower + "ay";
         } else {
