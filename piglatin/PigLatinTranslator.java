@@ -58,7 +58,7 @@ public class PigLatinTranslator {
             first.equals("u") || first.equals("U");
 // this is so i could commit.
         if (startsWithVowel) {
-            result = lower + "ay";
+            result = lower + "ay"; //j
         } else {
             // find where the first vowel is
             int vowelLocation = -1;
