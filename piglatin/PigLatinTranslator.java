@@ -1,12 +1,11 @@
 package piglatin;
+import java.util.Scanner;
 
 public class PigLatinTranslator {
     public static Book translate(Book input) {
         Book translatedBook = new Book();
 
-        // TODO: add code here later for translating whole books
-        // for now this does nothing but looks fancy
-
+        // TODO: translate the book later
         return translatedBook;
     }
 
@@ -18,18 +17,18 @@ public class PigLatinTranslator {
         // if it's empty just return empty
         if (input == null || input.trim().isEmpty()) return "";
 
-        // split the sentence into words
-        String[] words = input.split(" ");
+        // use a scanner to go through each word in the string
+        Scanner sc = new Scanner(input);
+        while (sc.hasNext()) {
+            String word = sc.next();
+            result += translateWord(word);
 
-        // go through all the words
-        for (int i = 0; i < words.length; i++) {
-            result += translateWord(words[i]);
-
-            // add space after each word except the last one
-            if (i < words.length - 1) {
+            // add a space if there’s still more words
+            if (sc.hasNext()) {
                 result += " ";
             }
         }
+        sc.close();
 
         return result;
     }
