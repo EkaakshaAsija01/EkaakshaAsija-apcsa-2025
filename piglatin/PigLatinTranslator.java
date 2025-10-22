@@ -4,10 +4,8 @@ public class PigLatinTranslator {
     public static Book translate(Book input) {
         Book translatedBook = new Book();
 
-        // TODO: Add code here to populate translatedBook with a translation of the
-        // input book.
-        // Current do-nothing code will return an empty book.
-        // Your code will need to call translate(String input) many times.
+        // TODO: add code here later for translating whole books
+        // for now this does nothing but looks fancy
 
         return translatedBook;
     }
@@ -17,11 +15,21 @@ public class PigLatinTranslator {
 
         String result = "";
 
-        // TODO: translate a string input, store in result.
-        // The input to this function could be any English string.
-        // It may be made up of many words.
-        // This method must call translateWord once for each word in the string.
-        result = translateWord(input);
+        // if it's empty just return empty
+        if (input == null || input.trim().isEmpty()) return "";
+
+        // split the sentence into words
+        String[] words = input.split(" ");
+
+        // go through all the words
+        for (int i = 0; i < words.length; i++) {
+            result += translateWord(words[i]);
+
+            // add space after each word except the last one
+            if (i < words.length - 1) {
+                result += " ";
+            }
+        }
 
         return result;
     }
@@ -51,25 +59,21 @@ public class PigLatinTranslator {
         String first = lower.substring(0, 1);
 
         boolean startsWithVowel =
-            first.equals("a") || first.equals("A") ||
-            first.equals("e") || first.equals("E") ||
-            first.equals("i") || first.equals("I") ||
-            first.equals("o") || first.equals("O") ||
-            first.equals("u") || first.equals("U");
-// this is so i could commit.
+            first.equals("a") || first.equals("e") ||
+            first.equals("i") || first.equals("o") ||
+            first.equals("u");
+
         if (startsWithVowel) {
-            result = lower + "ay"; //j
+            result = lower + "ay";
         } else {
             // find where the first vowel is
             int vowelLocation = -1;
             int i = 0;
             while (i < lower.length() && vowelLocation == -1) {
                 String letter = lower.substring(i, i + 1);
-                if (letter.equals("a") || letter.equals("A") ||
-                    letter.equals("e") || letter.equals("E") ||
-                    letter.equals("i") || letter.equals("I") ||
-                    letter.equals("o") || letter.equals("O") ||
-                    letter.equals("u") || letter.equals("U")) {
+                if (letter.equals("a") || letter.equals("e") ||
+                    letter.equals("i") || letter.equals("o") ||
+                    letter.equals("u")) {
                     vowelLocation = i;
                 }
                 i = i + 1;
