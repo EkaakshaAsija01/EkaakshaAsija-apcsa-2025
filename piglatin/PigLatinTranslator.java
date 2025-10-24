@@ -10,23 +10,15 @@ public class PigLatinTranslator {
     }
 
     public static String translate(String input) {
-        System.out.println("  -> translate('" + input + "')");
-
         String result = "";
 
-        // if it's empty just return empty
-        if (input == null || input.trim().isEmpty()) return "";
+        if (input == null || input.equals("") || input.equals("    ")) return "";
 
-        // use a scanner to go through each word in the string
         Scanner sc = new Scanner(input);
         while (sc.hasNext()) {
             String word = sc.next();
             result += translateWord(word);
-
-            // add a space if there’s still more words
-            if (sc.hasNext()) {
-                result += " ";
-            }
+            if (sc.hasNext()) result += " ";
         }
         sc.close();
 
@@ -34,14 +26,9 @@ public class PigLatinTranslator {
     }
 
     private static String translateWord(String input) {
-        System.out.println("  -> translateWord('" + input + "')");
-
-        String result = "";
-
-        // handle empty strings
         if (input.length() == 0) return input;
 
-        // handle punctuation at the end
+        // handle punctuation
         String punctuation = "";
         String last = input.substring(input.length() - 1);
         if (!Character.isLetter(last.charAt(0))) {
@@ -50,50 +37,38 @@ public class PigLatinTranslator {
         }
 
         // check if first letter is uppercase
-        boolean startsUpper = Character.isUpperCase(input.charAt(0));
+        boolean firstUpper = Character.isUpperCase(input.charAt(0));
 
-        // make the word lowercase to work with
-        String lower = input.toLowerCase();
+        // lowercase first letter only
+        input = input.substring(0,1).toLowerCase() + input.substring(1);
 
-        String first = lower.substring(0, 1);
+        // find first vowel
+        int vowelLocation = -1;
+        for (int i = 0; i < input.length(); i++) {
+            String letter = input.substring(i, i+1).toLowerCase();
+            if (letter.equals("a") || letter.equals("e") || letter.equals("i") || letter.equals("o") || letter.equals("u")) {
+                vowelLocation = i;
+                break;
+            }
+        }
 
-        boolean startsWithVowel =
-            first.equals("a") || first.equals("e") ||
-            first.equals("i") || first.equals("o") ||
-            first.equals("u");
-
-        if (startsWithVowel) {
-            result = lower + "ay";
+        String result;
+        if (vowelLocation == 0) {
+            result = input + "ay";
+        } else if (vowelLocation != -1) {
+            String start = input.substring(0, vowelLocation);
+            String end = input.substring(vowelLocation);
+            result = end + start + "ay";
         } else {
-            // find where the first vowel is
-            int vowelLocation = -1;
-            int i = 0;
-            while (i < lower.length() && vowelLocation == -1) {
-                String letter = lower.substring(i, i + 1);
-                if (letter.equals("a") || letter.equals("e") ||
-                    letter.equals("i") || letter.equals("o") ||
-                    letter.equals("u")) {
-                    vowelLocation = i;
-                }
-                i = i + 1;
-            }
-
-            if (vowelLocation != -1) {
-                String start = lower.substring(0, vowelLocation);
-                String end = lower.substring(vowelLocation);
-                result = end + start + "ay";
-            } else {
-                // if no vowels at all
-                result = lower + "ay";
-            }
+            result = input + "ay";
         }
 
-        // make first letter uppercase again if original started uppercase
-        if (startsUpper && result.length() > 0) {
-            result = result.substring(0, 1).toUpperCase() + result.substring(1);
+        // apply capitalization to first letter if needed
+        if (firstUpper && result.length() > 0) {
+            result = result.substring(0,1).toUpperCase() + result.substring(1);
         }
 
-        // put punctuation back
+        // add punctuation back
         result = result + punctuation;
 
         return result;
