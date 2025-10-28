@@ -15,7 +15,7 @@ public class PigLatinTranslator {
 
         // Return the finished translated book
         return translatedBook;
-    }
+    }// this was so i could turn the project in and say that in the comments. 
 
     // Helper method to translate a single line
     private static String translateLine(String line) {
