@@ -28,21 +28,19 @@ public class App {
         // Focus on TestSuite until you get a score of 5 or higher.
         if (score > 4)
         {
-            // Starter book
-            Book input = new Book();
+            // Translate Romeo and Juliette
+            Book romeoBook = new Book();
+            romeoBook.readFromUrl("Romeo and Juliette", "https://www.gutenberg.org/cache/epub/1513/pg1513.txt");
+            Book romeoTranslated = PigLatinTranslator.translate(romeoBook);
+            romeoTranslated.writeToFile("RomeoAndJuliette_PigLatin.txt");
+            romeoTranslated.printlines(0, 10); // first 10 lines
 
-            // Start with a "test" book based on a string.
-            // Get this to work, and all the tests to pass first.
-            //input.readFromString("TestBook", "Dog\nCat\nMouse");
-
-            // Example reading from a URL
-            input.readFromUrl("Romeo and Juliette", "https://gutenberg.pglaf.org/cache/epub/1513/pg1513.txt");
-
-            input.printlines(0,2);
-            Book output = PigLatinTranslator.translate(input);
-            output.printlines(0,2);
-            output.writeToFile("test.txt");
+            // Translate Hamlet
+            Book hamletBook = new Book();
+            hamletBook.readFromUrl("Hamlet", "https://www.gutenberg.org/cache/epub/1787/pg1787.txt?utm");
+            Book hamletTranslated = PigLatinTranslator.translate(hamletBook);
+            hamletTranslated.writeToFile("Hamlet_PigLatin.txt");
+            hamletTranslated.printlines(0, 10); // first 10 lines
         }
     }
 }
-

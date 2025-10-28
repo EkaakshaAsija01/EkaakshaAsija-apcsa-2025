@@ -1,52 +1,79 @@
 package piglatin;
+
 import java.util.Scanner;
 
 public class PigLatinTranslator {
+    
     public static Book translate(Book input) {
+        // Create a new book that will hold the translated version
         Book translatedBook = new Book();
 
-        // TODO: translate the book later
+        // Loop through each line of the input book and translate it
+        for (int i = 0; i < input.getLineCount(); i++) {
+            translatedBook.appendLine(translateLine(input.getLine(i)));
+        }
+
+        // Return the finished translated book
         return translatedBook;
+    }
+
+    // Helper method to translate a single line
+    private static String translateLine(String line) {
+        return translate(line);
     }
 
     public static String translate(String input) {
         String result = "";
 
+        // Handle empty or null input
         if (input == null || input.equals("") || input.equals("    ")) return "";
 
+        // Use Scanner to go word by word
         Scanner sc = new Scanner(input);
         while (sc.hasNext()) {
             String word = sc.next();
             result += translateWord(word);
-            if (sc.hasNext()) result += " ";
+            if (sc.hasNext()) result += " "; // add space between words
         }
         sc.close();
 
         return result;
     }
 
+    // Method to translate one individual word into Pig Latin
     private static String translateWord(String input) {
-        if (input.length() == 0) return input;
-
-        // handle punctuation
-        String punctuation = "";
-        String last = input.substring(input.length() - 1);
-        if (!Character.isLetter(last.charAt(0))) {
-            punctuation = last;
-            input = input.substring(0, input.length() - 1);
+        // Make sure the string isn't empty or just spaces
+        if (input == null || input.trim().length() == 0) {
+            return input;
         }
 
-        // check if first letter is uppercase
+        // Handle punctuation at the end of a word
+        String punctuation = "";
+        if (input.length() > 0) {
+            String last = input.substring(input.length() - 1);
+            if (!Character.isLetter(last.charAt(0))) {
+                punctuation = last;
+                input = input.substring(0, input.length() - 1);
+            }
+        }
+
+        // If the word is now empty (like "." or "!"), return it directly
+        if (input.length() == 0) {
+            return punctuation;
+        }
+
+        // Check if the first letter is uppercase
         boolean firstUpper = Character.isUpperCase(input.charAt(0));
 
-        // lowercase first letter only
-        input = input.substring(0,1).toLowerCase() + input.substring(1);
+        // Lowercase only the first letter
+        input = input.substring(0, 1).toLowerCase() + input.substring(1);
 
-        // find first vowel
+        // Find the first vowel in the word
         int vowelLocation = -1;
         for (int i = 0; i < input.length(); i++) {
-            String letter = input.substring(i, i+1).toLowerCase();
-            if (letter.equals("a") || letter.equals("e") || letter.equals("i") || letter.equals("o") || letter.equals("u")) {
+            String letter = input.substring(i, i + 1).toLowerCase();
+            if (letter.equals("a") || letter.equals("e") || letter.equals("i") ||
+                letter.equals("o") || letter.equals("u")) {
                 vowelLocation = i;
                 break;
             }
@@ -63,12 +90,12 @@ public class PigLatinTranslator {
             result = input + "ay";
         }
 
-        // apply capitalization to first letter if needed
+        // Reapply capitalization if the original started uppercase
         if (firstUpper && result.length() > 0) {
-            result = result.substring(0,1).toUpperCase() + result.substring(1);
+            result = result.substring(0, 1).toUpperCase() + result.substring(1);
         }
 
-        // add punctuation back
+        // Add punctuation back
         result = result + punctuation;
 
         return result;
