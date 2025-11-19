@@ -30,7 +30,7 @@ public class CardTable {
             System.out.println("Enter a command: (q to quit)");
             input = keyboard.nextLine();
 
-            // Check for exit condition
+            // These are the inputs you can use to escape the game.
             if (input.length() > 0)
             {
                 String command = input.substring(0, 1);
