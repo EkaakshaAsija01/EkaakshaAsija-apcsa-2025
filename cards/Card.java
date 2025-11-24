@@ -10,7 +10,7 @@ public Card(int suit, int value)//constructor
     this.suit=suit;
     this.value=value;
 }
-public int getValue()//methods we need
+public int getValue()//methods we need // this was so i could commit
 {
     return value;
 }
