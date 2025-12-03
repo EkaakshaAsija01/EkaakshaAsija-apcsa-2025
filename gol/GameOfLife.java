@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class GameOfLife implements Board {
 
     // Integers: 0 or 1 for alive or dead
-    private int[][] board;
+    private int[][] board; 
 
     public GameOfLife(int x, int y)
     {
