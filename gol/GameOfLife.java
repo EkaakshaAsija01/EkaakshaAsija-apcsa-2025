@@ -3,7 +3,7 @@ package gol;
 import java.util.Arrays;
 
 public class GameOfLife implements Board {
-
+// for commits.
     // Integers: 0 or 1 for alive or dead
     private int[][] board; 
 
