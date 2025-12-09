@@ -7,7 +7,7 @@ public class GameOfLife implements Board {
     // Integers: 0 or 1 for alive or dead
     private int[][] board; 
 
-    public GameOfLife(int x, int y)
+    public GameOfLife(int x, int y) //commit
     {
         // Construct a 2d array of the given x and y size.
     }
