@@ -10,6 +10,7 @@ public class GameOfLife implements Board {
     public GameOfLife(int x, int y) //commit
     {
         // Construct a 2d array of the given x and y size.
+        board = new int[x][y];   // <-- makes an empty board/grid
     }
 
     // Set values on the board
@@ -32,7 +33,6 @@ public class GameOfLife implements Board {
         print();
         // Update the game board, store a 1 if the cell is alive and a 0 otherwise.
     }
-
 
     public int countNeighbors(int x, int y) {
         int count = 0;
