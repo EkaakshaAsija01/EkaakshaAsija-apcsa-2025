@@ -53,7 +53,7 @@ public class GameOfLife implements Board {
                     if (neighbors == 3) {
                         next[x][y] = 1;
                     }
-                }
+                } //another commit
             }
         }
 
