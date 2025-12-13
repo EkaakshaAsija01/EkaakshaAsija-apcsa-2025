@@ -10,9 +10,9 @@ public class GameOfLife implements Board {
     public GameOfLife(int x, int y) //commit
     {
         // Construct a 2d array of the given x and y size.
-        board = new int[x][y];   // <-- makes an empty board/grid
+        board = new int[x][y]; // make board
     }
-// commmit
+
     // Set values on the board
     public void set(int x, int y, int[][] data) {
         for (int i = 0; i < data.length; i++) {
@@ -25,19 +25,55 @@ public class GameOfLife implements Board {
     // Run the simulation for a number of turns
     public void run(int turns) {
         // call step the number of times requested
+        for (int i = 0; i < turns; i++) {
+            step(); // repeat steps
+        }
     }
 
     // Step the simulation forward one turn.
     public void step()
     {
         print();
-        // Update the game board, store a 1 if the cell is alive and a 0 otherwise.
+
+        int[][] next = new int[board.length][board[0].length]; // next board
+
+        for (int x = 0; x < board.length; x++) {
+            for (int y = 0; y < board[0].length; y++) {
+
+                int neighbors = countNeighbors(x, y); // count neighbors
+                int current = board[x][y];            // current cell
+
+                if (current == 1) {
+                    if (neighbors == 2 || neighbors == 3) {
+                        next[x][y] = 1;
+                    } else {
+                        next[x][y] = 0;
+                    }
+                } else {
+                    if (neighbors == 3) {
+                        next[x][y] = 1;
+                    }
+                }
+            }
+        }
+
+        board = next; // update board
     }
 
     public int countNeighbors(int x, int y) {
         int count = 0;
         // count the number of neighbors the cell has
         // use the get(x,y) method to read any board state you need.
+
+        for (int dx = -1; dx <= 1; dx++) {
+            for (int dy = -1; dy <= 1; dy++) {
+
+                if (dx == 0 && dy == 0) continue; // skip self
+
+                count += get(x + dx, y + dy); // add neighbor
+            }
+        }
+
         return count;
     }
 
