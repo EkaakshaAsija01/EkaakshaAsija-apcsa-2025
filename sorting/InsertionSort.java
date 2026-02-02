@@ -16,4 +16,6 @@ public class InsertionSort implements Sorter {
             input[j + 1] = key; // Insert element
         }
     }
-} //Explanation in the comments I put. 
+} // Starts with the second number. 
+// It compares this number to the ones before it and moves it to the correct spot. 
+// Repeats for each number until the whole list is sorted.
