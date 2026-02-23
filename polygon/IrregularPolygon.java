@@ -7,7 +7,7 @@ import gpdraw.*; // for DrawingTool
 public class IrregularPolygon {
     private ArrayList<Point2D.Double> myPolygon = new ArrayList<Point2D.Double>();
 
-    // constructor
+    // constructor// for commit
     public IrregularPolygon() {}
 
     // public methods
