@@ -8,7 +8,7 @@ public class TestSuite {
     public static void run()
     {
         System.out.println("Starting TestSuite");
-        boolean pass = true;
+        boolean pass = true;//comment
 
         double[][] singlePoint = { { 0, 0 } };
         pass &= basicTest("Single Point", singlePoint, 0, 0);
