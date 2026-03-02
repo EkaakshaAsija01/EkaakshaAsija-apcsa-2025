@@ -16,10 +16,20 @@ public class IrregularPolygon {
         myPolygon.add(aPoint);// TODO: Add a point to the IrregularPolygon.
     }
 
-     public double perimeter() {
-        // TODO: Calculate the perimeter.
+    public double perimeter() {
+        double total = 0.0;
+        for (int i = 0; i < myPolygon.size() - 1; i++) {
+            Point2D.Double p1 = myPolygon.get(i); //find the distance between point and next point and add to total.
+            Point2D.Double p2 = myPolygon.get(i + 1);
+            total += p1.distance(p2);
+            } //I didn't like the old method I used of using module to bring everything connect the first and last points to finish the shape.
+        Point2D.Double first = myPolygon.get(0); // I hardcoded the final side to be added into the area.
+        Point2D.Double last = myPolygon.get(myPolygon.size() - 1);
+        total += last.distance(first);
 
+        return total;
        
+
     }
 
     public void draw()
