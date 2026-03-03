@@ -9,13 +9,13 @@ public class IrregularPolygon {
 
     // constructor// for commit
     public IrregularPolygon() {}
-
+  
     // public methods
     public void add(Point2D.Double aPoint)
     {
         myPolygon.add(aPoint);// TODO: Add a point to the IrregularPolygon.
     }
-
+  
     public double perimeter() {
         double total = 0.0;
         for (int i = 0; i < myPolygon.size() - 1; i++) {
@@ -30,6 +30,24 @@ public class IrregularPolygon {
         return total;
        
 
+    }
+    public double area() {
+        double total = 0.0;
+
+        // Add products for consecutive points
+        for (int i = 0; i < myPolygon.size() - 1; i++) {
+            Point2D.Double p1 = myPolygon.get(i);
+            Point2D.Double p2 = myPolygon.get(i + 1);
+            total += (p1.x * p2.y) - (p1.y * p2.x);
+        } // This is the shoelace formula we learned about in class. I used a similar approach as the perimeter but instead I used area formula.
+
+        // Add last point connected to first. Similar to perimeter, I hardcoded it to avoid forloop confusion.
+        Point2D.Double first = myPolygon.get(0);
+        Point2D.Double last = myPolygon.get(myPolygon.size() - 1);
+
+        total += (last.x * first.y) - (last.y * first.x);
+
+        return Math.abs(total) / 2.0;
     }
 
     public void draw()
