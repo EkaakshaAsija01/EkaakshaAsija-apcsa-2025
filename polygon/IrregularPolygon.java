@@ -23,7 +23,7 @@ public class IrregularPolygon {
             Point2D.Double p2 = myPolygon.get(i + 1);
             total += p1.distance(p2);
             } //I didn't like the old method I used of using module to bring everything connect the first and last points to finish the shape.
-        Point2D.Double first = myPolygon.get(0); // I hardcoded the final side to be added into the area.
+        Point2D.Double first = myPolygon.get(0); // I hardcoded the final side to be added into the perimeter. My forloop using modulo didn't work
         Point2D.Double last = myPolygon.get(myPolygon.size() - 1);
         total += last.distance(first);
 
