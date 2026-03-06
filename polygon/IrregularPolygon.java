@@ -50,17 +50,56 @@ public class IrregularPolygon {
         return Math.abs(total) / 2.0;
     }
 
-    public void draw()
-    {
-        // Wrap the DrawingTool in a try/catch to allow development without need for graphics.
-        try {
-            // TODO: Draw the polygon.
-            // Documents: https://pavao.org/compsci/gpdraw/html/gpdraw/DrawingTool.html
-            //DrawingTool myDrawingTool = new DrawingTool(new SketchPad(500, 500));
-            //myDrawingTool.move(50, 50);
-        } catch (java.awt.HeadlessException e) {
-            System.out.println("Exception: No graphics support available.");
+   public void draw()
+{
+    try {
+        if (myPolygon.isEmpty()) {
+            System.out.println("No points to draw.");
+            return;
         }
+
+        // baseline from first point
+        Point2D.Double firstPt = myPolygon.get(0);
+        double maxX = firstPt.getX();
+        double maxY = firstPt.getY();
+        double minX = firstPt.getX();
+        double minY = firstPt.getY();
+
+        // loop 1 – compute extents
+        for (int i = 1; i < myPolygon.size(); i++) {
+            double x = myPolygon.get(i).getX();
+            double y = myPolygon.get(i).getY();
+            if (x > maxX) maxX = x;
+            if (y > maxY) maxY = y;
+            if (x < minX) minX = x;
+            if (y < minY) minY = y;
+        }
+
+        int width  = (int) (maxX + 50);
+        int height = (int) (maxY + 50);
+        if (width  < 300) width  = 300;
+        if (height < 300) height = 300;
+
+        DrawingTool pen = new DrawingTool(new SketchPad(width, height));
+        double pad = 25; // keep the shape off the edge
+
+        // move to starting point
+        pen.up();
+        pen.move(firstPt.getX() - minX + pad, firstPt.getY() - minY + pad);
+        pen.down();
+
+        // loop 2 – draw by moving
+        for (int i = 1; i < myPolygon.size(); i++) {
+            double x = myPolygon.get(i).getX();
+            double y = myPolygon.get(i).getY();
+            pen.move(x - minX + pad, y - minY + pad);
+        }
+        // close polygon
+        pen.move(firstPt.getX() - minX + pad, firstPt.getY() - minY + pad);
+
+    } catch (java.awt.HeadlessException e) {
+        System.out.println("Exception: No graphics support available.");
     }
+}
 
 }
