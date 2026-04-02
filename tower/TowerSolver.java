@@ -6,7 +6,7 @@ public class TowerSolver {
     public TowerSolver()
     {
         // Nothing to do here
-    }
+    }// for commit
 
     public void solve(TowerModel model)
     {
